@@ -1,20 +1,9 @@
 <?php
     require 'required.php';
 
-    //on simule la connexion et le compte
-    $_SESSION['playerId'] = "1";
-    $_SESSION['accountId'] = "1";
-    $_SESSION['username'] = "Pipiro";
-
-    //on récupére les teams
+    // récupération des tems
     $tm = new PdoTeamsManager();
     $teams = $tm->getTeams();
-
-    $pttm = new PdoPlayersToTeamManager();
-
-    $pm = new PdoPlayersManager();
-    //$players = $pm->getActivesPlayers();
-
 ?>
 
 <!DOCTYPE html>
@@ -49,12 +38,53 @@
     <!-- Custom Fonts -->
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <!-- Custom Perso -->
+    <link href="../dist/css/style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="../dist/jquery/jquery-2.0.3.js"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script type="text/javascript">
+     // Au premier chargement on appel ajax
+      $( document ).ready(function() {
+          getPlayersTeam(<?= $teams[0]->getId() ?>);
+      });
+
+      function getPlayersTeam(idTeam)
+      {
+        //affichage du chargement
+       $('#affichage').html("<br /><br /><div style='text-align: center;'><p>Récupération et traitement des données</p><img src='../images/loader.gif' alt='chargement...'/></div>")
+       
+       //requête ajax, appel du fichier _returnNumberKeysAvailables.php
+       $.ajax(
+       {
+        type: "GET",
+        url: "ajax/_returnPlayersTeam.php?idTeam="+idTeam,
+        dataType : "html",
+        //affichage de l'erreur en cas de problème
+        error:function(msg, string)
+        {
+          alert( "Error !: " + string );
+        },
+        success:function(data)
+        {
+          //on met à jour la div contenu_stats avec les données reçus
+          //on vide la div et on le cache
+          $("#affichage").empty().hide();
+          //on affecte les resultats au div
+          $("#affichage").append(data);
+          //on affiche les resultats avec la transition
+          $('#affichage').fadeIn(800);
+        }
+       });
+      }
+
+    </script>
 
 </head>
 
@@ -76,35 +106,18 @@
         </nav>
 
         <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <?php if ($_SESSION['username'] != null) { ?>
-                        <h1 class="page-header"><?php echo $_SESSION['username']; ?>
-                    <?php } else { ?>
-                        <h1 class="page-header">Bienvenue</h1>
-                    <?php } ?>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
             <!-- /.row -->
             <div class="row">
+                <form action='team.php' method='post'>
+                  <select onchange="getPlayersTeam(this.value)">
+                    <?php foreach($teams as $team): ?>
+                      <?php echo "<option value='".$team->getId()."'>".$team->getName()."</option>"; ?>
+                    <?php endforeach; ?>
+                  </select>
+                </form>
+
                 <div id="affichage">
 
-                     <center><img src="../images/LeagueOfLegendsLogo.png"></center>
-
-                      <?php //on récupére les joueurs a surveiller
-                      foreach($teams as $team)
-                      {
-                        echo "<h1>".$team->getName()."</h1><br \>";
-                        $playersToTeam = $pttm->getPlayersByTeamId($team->getId());
-                        foreach($playersToTeam as $playerToTeam)
-                        {
-                          $player = $pm->getPlayerbyId($playerToTeam->getIdPlayer());
-                          echo $player->getName()."<br \>";
-                        }
-                      } 
-                      ?>
-       
                 </div>
             </div>
             <!-- /.row -->
