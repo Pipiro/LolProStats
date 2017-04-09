@@ -77,17 +77,6 @@
 
         <div id="page-wrapper">
             <div class="row">
-                <div class="col-lg-12">
-                    <?php if ($_SESSION['username'] != null) { ?>
-                        <h1 class="page-header"><?php echo $_SESSION['username']; ?>
-                    <?php } else { ?>
-                        <h1 class="page-header">Bienvenue</h1>
-                    <?php } ?>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
                 <div id="affichage">
 
                      <center><img src="../images/LeagueOfLegendsLogo.png"></center>

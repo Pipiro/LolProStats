@@ -300,7 +300,7 @@
                   arsort($arrayRole);
                   arsort($arrayChampion); ?>
 
-                   <div id="containerJoueFreq">
+                  <!-- <div id="containerJoueFreq">
                   <?php foreach($champs as $champ):
                     if ($champ->id == key($arrayChampion)) {
 
@@ -311,7 +311,6 @@
                         else if ($champName=="Wukong")$champName="MonkeyKing";
                         else if ($champName=="Kha'Zix")$champName="Khazix";
                         else if ($champName=="Cho'Gath")$champName="Chogath";
-                        else if ($champName=="Fiddlesticks")$champName="FiddleSticks";
                         else if ($champName=="Rek'Sai")$champName="RekSai";
                         else if ($champName=="Kog'Maw")$champName="KogMaw";
                         else if ($champName=="Vel'Koz")$champName="Velkoz";
@@ -321,7 +320,7 @@
                     }
                   endforeach;
                   echo "<h2>" . key($arrayRole) . " " . key($arrayLane) . "</h2>"; ?>
-                  </div>
+                  </div> -->
                 <?php }
              } ?>
 
@@ -340,7 +339,6 @@
                 <?php if ($champName=="Wukong")$champName="MonkeyKing"; ?>
                 <?php if ($champName=="Kha'Zix")$champName="Khazix"; ?>
                 <?php if ($champName=="Cho'Gath")$champName="Chogath"; ?>
-                <?php if ($champName=="Fiddlesticks")$champName="FiddleSticks"; ?>
                 <?php if ($champName=="Rek'Sai")$champName="RekSai"; ?>
                 <?php if ($champName=="Kog'Maw")$champName="KogMaw"; ?>
                 <?php if ($champName=="Vel'Koz")$champName="Velkoz"; ?>

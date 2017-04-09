@@ -107,6 +107,7 @@
 
         <div id="page-wrapper">
             <!-- /.row -->
+            <br />
             <div class="row">
                 <form action='team.php' method='post'>
                   <select onchange="getPlayersTeam(this.value)">
