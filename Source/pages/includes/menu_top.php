@@ -72,11 +72,11 @@
                 <li class="dropdown">
                     <div>
       <?php if ($numberKeyAvailable == 7)  { ?>
-        <button style="margin-left: -550px;" class="btn btn-success">Clées disponibles <span class="badge text-success" id="number_keys_available"><?php echo $numberKeyAvailable; ?></span></button>
+        <button class="btn btn-success">Clées disponibles <span class="badge text-success" id="number_keys_available"><?php echo $numberKeyAvailable; ?></span></button>
       <?php } else if ($numberKeyAvailable > 3) { ?>
-        <button style="margin-left: 350px;" class="btn btn-info">Clées disponibles <span class="badge text-success" id="number_keys_available"><?php echo $numberKeyAvailable; ?></span></button>
+        <button class="btn btn-info">Clées disponibles <span class="badge text-success" id="number_keys_available"><?php echo $numberKeyAvailable; ?></span></button>
       <?php } else  { ?>
-        <button style="margin-left: 350px;" class="btn btn-danger">Clées disponibles <span class="badge text-success" id="number_keys_available"><?php echo $numberKeyAvailable; ?></span></button>
+        <button class="btn btn-danger">Clées disponibles <span class="badge text-success" id="number_keys_available"><?php echo $numberKeyAvailable; ?></span></button>
       <?php } ?>
     </div> 
                     <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">

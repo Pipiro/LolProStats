@@ -6,9 +6,50 @@
     $statsJoueurRanked = $am->getStatsRankedByIdPlayer($_GET['idJoueur'],$_GET['season']);
     $statsJoueurSummary = $am->getStatsSummaryByIdPlayer($_GET['idJoueur'],$_GET['season']);
     $player = $am->getPlayerById($_GET['idJoueur']);
+    $leaguePlayer = $am->getInfoLeagueByIdPlayer($_GET['idJoueur']);
     $champs = $am->getChamps()->data; ?>
 
     <?php
+
+    if (!isset(current($leaguePlayer)->status_code)) 
+    { 
+      foreach(current($leaguePlayer) as $league)
+      {
+        if ($league->queue == "RANKED_SOLO_5x5") 
+        { 
+          $tier = $league->tier;
+          foreach($league->entries as $entry)
+          {
+            if ($entry->playerOrTeamId == $_GET['idJoueur'])
+            {
+              $division = $entry->division;
+            }
+          }
+        }
+      }
+    }
+
+    switch ($tier) {
+      case 'BRONZE':
+        $couleur = "#614E1A";
+        break;
+      case 'SILVER':
+        $couleur = "#CECECE";
+        break;
+      case 'GOLD':
+        $couleur = "#EFD807";
+        break;
+      case 'PLATINUM':
+        $couleur = "#79F8F8";
+        break;
+      case 'DIAMOND':
+        $couleur = "#74D0F1";
+        break;
+      default:
+        $couleur = "#FF7F00";
+        break;
+    }
+
     if (isset($statsJoueurSummary->playerStatSummaries))
     {
         //recuperation des victoires et des defaites selon le mode de jeu
@@ -44,19 +85,19 @@
         $showStats = true;  ?>
 
               <div class="col-lg-3 col-md-6">
-                <div class="panel panel-primary">
-                          <div class="panel-heading">
-                              <div class="row">
-                                  <div class="col-xs-3">
-                                      <i class="fa fa-gamepad fa-5x"></i>
-                                  </div>
-                                  <div class="col-xs-9 text-right">
-                                      <div class="huge"><?= $totalGame ?></div>
-                                      <div>Parties jouées</div>
-                                  </div>
-                              </div>
-                          </div>
-                </div>
+                    <div class="panel" style="background-color: <?= $couleur ?>; border-color: <?= $couleur ?>; color: #fff;">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-trophy fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><?= $tier." ".$division ?></div>
+                                    <div>League Solo/Duo 2017</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
               </div>
               <div class="col-lg-3 col-md-6">
                     <div class="panel panel-green">
@@ -87,7 +128,22 @@
                             </div>
                         </div>
                     </div>
-                </div><br /><br />
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="panel panel-primary">
+                          <div class="panel-heading">
+                              <div class="row">
+                                  <div class="col-xs-3">
+                                      <i class="fa fa-gamepad fa-5x"></i>
+                                  </div>
+                                  <div class="col-xs-9 text-right">
+                                      <div class="huge"><?= $totalGame ?></div>
+                                      <div>Parties jouées</div>
+                                  </div>
+                              </div>
+                          </div>
+                </div>
+              </div><br /><br />
                
         <?php
         //on ne doit pas remplir la gauge s il ny a pas de donnees

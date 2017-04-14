@@ -161,6 +161,19 @@
 
     </script>
 
+    <style type="text/css">
+      .roundedImage{
+          overflow:hidden;
+          -webkit-border-radius:50px;
+          -moz-border-radius:50px;
+          border-radius:50px;
+          width:64px;
+          height:64px;
+          box-shadow: 0px 0px 10px #343434;
+      }
+
+    </style>
+
 </head>
 
 <body>
@@ -262,12 +275,16 @@
               </div>
 
               <div id="titleStat" style="float:left; width: 600px;">
-                <div id="namePlayer" style="float:left;">
-                  <?php echo "<img style='opacity:0.5;' src='http://lkimg.zamimg.com/images/v2/summoner/icons/size64x64/" . $player->$_GET['id']->profileIconId . ".png'". "title='Icone'></div>"; ?>
-                  <?php echo "<h2>".$player->$_GET['id']->name."</h1>"; ?> 
+                <div id="namePlayer" style="float:left; width: 500px; margin-top: 10px;">
+                  <?php echo "<div class='roundedImage' style='height: 64px; width: 64px; float: left; background:url(http://lkimg.zamimg.com/images/v2/summoner/icons/size64x64/" . $player->$_GET['id']->profileIconId . ".png'".") no-repeat 0px 0px;''>&nbsp;</div>"; ?>
+                  <?php //echo "<img style='opacity:0.5;' src='http://lkimg.zamimg.com/images/v2/summoner/icons/size64x64/" . $player->$_GET['id']->profileIconId . ".png'". "title='Icone'></div>"; ?>
+                  <?php echo "<span style='margin-left: 10px; float: left;''><h2>".$player->$_GET['id']->name."</h1></span>"; ?>
                 </div>
-                <div id="container_victoire" style="width: 300px; height: 200px; float: right;"></div>     
               </div>
+
+
+              <center><div id="container_victoire" style="width: 300px; height: 200px; margin-top:100px;"></div></center>
+                
 
 
               <div id="statutChargement" style='clear:both;'>
