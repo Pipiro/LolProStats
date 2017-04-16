@@ -125,7 +125,7 @@
                               <?php if ($entry->playerOrTeamId == $playerId): ?>
 
                                   <?php $ranked = true; ?>
-                                  <?php echo "<a href='statsPlayer.php?id=" . $entry->playerOrTeamId . "&season=2016'>" . "<br /><b>" . $entry->playerOrTeamName . "</b></a>"?>
+                                  <?php echo "<a href='statsPlayer.php?id=" . $entry->playerOrTeamId . "&season=2017'>" . "<br /><b>" . $entry->playerOrTeamName . "</b></a>"?>
                                   <!-- on parse la ligue pour récupérer l'image  -->
                                   <?php $imageLeagueLien = "http://lkimg.zamimg.com/images/medals/" . $tierLower . " " . $entry->division . ".png";
                                   $imageLeague = strReplaceAssoc($replace, $imageLeagueLien); ?>
@@ -183,7 +183,7 @@
                               <div class='btn btn-info' style="margin-top: 350px;"><i class='fa fa-bell faa-ring animated' aria-hidden='true'></i> En Jeu</div>
                           <?php } ?>
                         </div>
-                            <?php echo "<a href='statsPlayer.php?id=" . reset($playerProp)->id . "&season=2016'>" . "<br /><b>" . $_GET['pseudo'] . "</b></a>"?>
+                            <?php echo "<a href='statsPlayer.php?id=" . reset($playerProp)->id . "&season=2017'>" . "<br /><b>" . $_GET['pseudo'] . "</b></a>"?>
 
                             <br />
 

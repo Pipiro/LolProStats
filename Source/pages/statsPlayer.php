@@ -13,7 +13,7 @@
     }
     else
     {
-      $numberSeason = 2016;
+      $numberSeason = 2017;
     }
 
     $player = $am->getPlayerById($_GET['id']);
@@ -90,9 +90,11 @@
        $('#2014').removeClass('active');
        $('#2015').removeClass('active');
        $('#2016').removeClass('active');
+       $('#2017').removeClass('active');
        $('#TOUS').removeClass('active');
        $('#RANKED_SOLO').removeClass('active');
        $('#RANKED_TEAM_5V5').removeClass('active');
+       $('#RANKED_FLEX').removeClass('active');
 
        $('#'+season).toggleClass('active');
        $('#'+mode).toggleClass('active');
@@ -140,6 +142,7 @@
        $("#input_TOUS").attr("onChange", "updateSeason('TOUS');getStatsPlayer("+season+",'TOUS')");
        $("#input_RANKED_SOLO").attr("onChange", "updateSeason('RANKED_SOLO');getStatsPlayer("+season+",'RANKED_SOLO')");
        $("#input_RANKED_TEAM_5V5").attr("onChange", "updateSeason('RANKED_TEAM_5V5');getStatsPlayer("+season+",'RANKED_TEAM_5V5')");
+       $("#input_RANKED_FLEX").attr("onChange", "updateSeason('RANKED_FLEX');getStatsPlayer("+season+",'RANKED_FLEX')");
        // gestion de la particularité des team ranked lors de la saison 2016
        if (season != 2016)
        {
@@ -149,6 +152,16 @@
        {
           $("#RANKED_TEAM_5V5").toggleClass('disabled');
        }
+       if (season != 2017)
+       {
+          $("#RANKED_TEAM_5V5").show();
+          $("#RANKED_FLEX").hide();
+       }
+        else
+       {
+          $("#RANKED_TEAM_5V5").hide();
+          $("#RANKED_FLEX").show();
+       }
       }
 
       function updateSeason(mode)
@@ -157,6 +170,7 @@
        $("#input_2014").attr("onChange", "updateMode(2014);getStatsPlayer(2014,'"+mode+"')");
        $("#input_2015").attr("onChange", "updateMode(2015);getStatsPlayer(2015,'"+mode+"')");
        $("#input_2016").attr("onChange", "updateMode(2016);getStatsPlayer(2016,'"+mode+"')");
+       $("#input_2017").attr("onChange", "updateMode(2017);getStatsPlayer(2017,'"+mode+"')");
       }
 
     </script>
@@ -196,7 +210,7 @@
         <div id="page-wrapper">
             <!-- /.row -->
             <div class="row">
-                <div id="filtre" style="float:right; width: 400px;">
+                <div id="filtre" style="float:right; width: 400px; margin-top: 10px;">
                    <form action='statsPlayer.php' method='post'>
                     <div class="btn-group" data-toggle="buttons" style="float:right;">
                       <?php if ($numberSeason == 3) { ?>
@@ -235,6 +249,15 @@
                           <input name="season" id="input_2016" value="2016" type="radio" onChange="updateMode(2016);getStatsPlayer(2016, '<?php echo $modeName; ?>')">2016
                         </label>
                       <?php } ?>
+                       <?php if ($numberSeason == 2017) { ?>
+                        <label id="2017" class="btn btn-info active">
+                          <input name="season" id="input_2017" value="2017" type="radio" onChange="updateMode(2017);getStatsPlayer(2017, '<?php echo $modeName; ?>')">2017
+                        </label>
+                      <?php } else { ?>
+                        <label id="2017" class="btn btn-info">
+                          <input name="season" id="input_2017" value="2017" type="radio" onChange="updateMode(2017);getStatsPlayer(2017, '<?php echo $modeName; ?>')">2017
+                        </label>
+                      <?php } ?>
                     </div>
 
                     <div class="btn-group" data-toggle="buttons" style="float:right; margin-top: 5px;">
@@ -256,15 +279,24 @@
                             <input name="mode" id="input_RANKED_SOLO" value="RANKED_SOLO" type="radio" onChange="updateSeason('RANKED_SOLO');getStatsPlayer(<?php echo $numberSeason; ?>, 'RANKED_SOLO')">Ranked Solo
                           </label>
                         <?php } ?>
-                        <?php if ($modeName == "RANKED_TEAM_5V5" && $numberSeason != 2016) { ?>
+                        <?php if ($numberSeason == 2017) { ?>
+                          <label id="RANKED_FLEX" class="btn btn-info active">
+                            <input name="mode" id="input_RANKED_FLEX" value="RANKED_FLEX" type="radio" onChange="updateSeason('RANKED_FLEX');getStatsPlayer(<?php echo $numberSeason; ?>, 'RANKED_FLEX')">Ranked Flex
+                          </label>
+                        <?php } ?>
+                        <?php if ($modeName == "RANKED_TEAM_5V5" && $numberSeason != 2016 && $numberSeason != 2017) { ?>
                           <label id="RANKED_TEAM_5V5" class="btn btn-info active">
                             <input name="mode" id="input_RANKED_TEAM_5V5" value="RANKED_TEAM_5V5" type="radio" onChange="updateSeason('RANKED_TEAM_5V5');getStatsPlayer(<?php echo $numberSeason; ?>, 'RANKED_TEAM_5V5')">Ranked Team 5v5
                           </label>
-                        <?php } else if ( $numberSeason != 2016) { ?>
+                          <?php } else if ($modeName == "TOUS" && $numberSeason == 2017) { ?>
+                          <label id="RANKED_TEAM_5V5" class="btn btn-info" style="display: none;">
+                            <input name="mode" id="input_RANKED_TEAM_5V5" value="RANKED_TEAM_5V5" type="radio" onChange="updateSeason('RANKED_TEAM_5V5');getStatsPlayer(<?php echo $numberSeason; ?>, 'RANKED_TEAM_5V5')">Ranked Team 5v5
+                          </label>
+                        <?php } else if ( $numberSeason != 2016 && $numberSeason != 2017) { ?>
                           <label id="RANKED_TEAM_5V5" class="btn btn-info">
                             <input name="mode" id="input_RANKED_TEAM_5V5" value="RANKED_TEAM_5V5" type="radio" onChange="updateSeason('RANKED_TEAM_5V5');getStatsPlayer(<?php echo $numberSeason; ?>, 'RANKED_TEAM_5V5')">Ranked Team 5v5
                           </label>
-                        <?php } else if ( $numberSeason == 2016) { ?>
+                        <?php } else if ( $numberSeason == 2016 && $numberSeason != 2017) { ?>
                           <label id="RANKED_TEAM_5V5" class="btn btn-info disabled">
                             <input name="mode" id="input_RANKED_TEAM_5V5" value="RANKED_TEAM_5V5" type="radio" onChange="updateSeason('RANKED_TEAM_5V5');getStatsPlayer(<?php echo $numberSeason; ?>, 'RANKED_TEAM_5V5')">Ranked Team 5v5
                           </label>

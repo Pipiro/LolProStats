@@ -117,7 +117,7 @@
                   <?php } ?>
 
                 </div>
-                <?php echo "<a href='statsPlayer.php?id=" . $playerStats->getIdPlayerLol() . "&season=2016'>" . "<br /><b>" . $playerStats->getNickname() . "</b></a>"?>
+                <?php echo "<a href='statsPlayer.php?id=" . $playerStats->getIdPlayerLol() . "&season=2017'>" . "<br /><b>" . $playerStats->getNickname() . "</b></a>"?>
 
                 <!-- on parse la ligue pour récupérer l'image  -->
                 <?php $imageLeagueLien = "http://lkimg.zamimg.com/images/medals/" . $tierLower . " " . $playerStats->getLeagueDivision() . ".png";
@@ -166,7 +166,7 @@
                       <?php } ?>
 
                     </div>
-                        <?php echo "<a href='statsPlayer.php?id=" . $playerIdLol . "&season=2016'>" . "<br /><b>" . $playerName. "</b></a>"; ?>
+                        <?php echo "<a href='statsPlayer.php?id=" . $playerIdLol . "&season=2017'>" . "<br /><b>" . $playerName. "</b></a>"; ?>
 
                         <img src="http://lkimg.zamimg.com/images/medals/unknown.png"></img>
 
@@ -206,7 +206,7 @@
                     <?php foreach($league->entries as $entry): ?>
                       <?php if ($entry->playerOrTeamId == $playerIdLol): ?>
                             <?php $nickname = $entry->playerOrTeamName; ?> 
-                            <?php echo "<a href='statsPlayer.php?id=" . $entry->playerOrTeamId . "&season=2016'>" . "<br /><b>" . $entry->playerOrTeamName . "</b></a>"?>
+                            <?php echo "<a href='statsPlayer.php?id=" . $entry->playerOrTeamId . "&season=2017'>" . "<br /><b>" . $entry->playerOrTeamName . "</b></a>"?>
 
                             <!-- on parse la ligue pour récupérer l'image  -->
                             <?php $imageLeagueLien = "http://lkimg.zamimg.com/images/medals/" . $tierLower . " " . $entry->division . ".png";
@@ -264,7 +264,7 @@
 
                     </div>
 
-                        <?php echo "<a href='statsPlayer.php?id=" . $playerIdLol . "&season=2016'>" . "<br /><b>" . $playerName . "</b></a>"; ?>
+                        <?php echo "<a href='statsPlayer.php?id=" . $playerIdLol . "&season=2017'>" . "<br /><b>" . $playerName . "</b></a>"; ?>
 
                         <img src="http://lkimg.zamimg.com/images/medals/unknown.png"></img>
 
